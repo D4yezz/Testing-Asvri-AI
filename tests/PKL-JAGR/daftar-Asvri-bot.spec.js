@@ -215,7 +215,7 @@ test.describe("Bot Testing", () => {
       await expect(page.getByText("test hari ini")).toBeVisible();
     });
 
-    test("Tambah Rekaman (TC-07)", async ({ page }) => {
+    test("Hapus (TC-07)", async ({ page }) => {
       await page.goto("http://sim.dev.asvri.ai/");
       await page.locator('input[name="identifier"]').fill("PKLJAGR");
       await page.getByRole("button", { name: "Sign in" }).click();
@@ -236,7 +236,48 @@ test.describe("Bot Testing", () => {
         .click();
 
       await page.locator("a").filter({ hasText: "Transkrip Rekaman" }).click();
-      await page.getByText("Lihat Rekaman").click();
+      await page
+        .getByRole("row", {
+          name: "testing test hari ini diubah 0 Lihat Rekaman 19/03/2025 13:",
+        })
+        .getByRole("button")
+        .click();
+      await page.getByRole("menuitem", { name: "Hapus" }).locator("a").click();
+      await page.getByRole("button", { name: "Hapus" }).click();
+      await expect(
+        page.getByRole("cell", { name: "/03/2025 13:14" })
+      ).not.toBeVisible();
+    });
+
+    test("Tambah Rekaman (TC-08)", async ({ page }) => {
+      await page.goto("http://sim.dev.asvri.ai/");
+      await page.locator('input[name="identifier"]').fill("PKLJAGR");
+      await page.getByRole("button", { name: "Sign in" }).click();
+      await page.locator('input[type="password"]').fill("IFcXRPCK");
+      await page.getByRole("button", { name: "Continue" }).click();
+      await expect(
+        page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+      ).toBeVisible();
+      await page.locator(".grid > .bg-white").click();
+      await expect(page).toHaveURL(
+        "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+      );
+      await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+      await page
+        .locator("div")
+        .filter({ hasText: /^TestingRAG0 Token dipakai$/ })
+        .first()
+        .click();
+
+      await page.locator("a").filter({ hasText: "Transkrip Rekaman" }).click();
+      await page
+        .getByRole("row", { name: "testing test hari ini 1 Lihat" })
+        .getByRole("button")
+        .click();
+      await page
+        .getByRole("menuitem", { name: "Lihat Transkrip Rekaman" })
+        .locator("a")
+        .click();
       await page.getByRole("button", { name: "Tambah Rekaman" }).click();
 
       await page.getByRole("textbox", { name: "Judul *" }).click();
@@ -249,6 +290,22 @@ test.describe("Bot Testing", () => {
       await page.getByRole("combobox", { name: "tagtest Tags" }).fill("tag2");
       await page.getByRole("combobox", { name: "tagtest Tags" }).press("Enter");
       await page.getByRole("button", { name: "Selanjutnya" }).click();
+      await page.getByRole("button", { name: "Unggah Audio/Video" }).click();
+      await page.setInputFiles(
+        "input#multifile",
+        "D:/File Coding/RPL-SMKN-8-MALANG/PKL_24-25/PlayWright/Testing-Asvri-AI/assets upload/keyboard.mp3"
+      );
+      await page.getByRole("button", { name: "Simpan" }).click();
+      await page
+        .getByRole("cell")
+        .filter({ hasText: /^$/ })
+        .getByRole("button")
+        .click();
+      await page
+        .getByRole("menuitem", { name: "Transkrip Ulang" })
+        .locator("a")
+        .click();
+      await expect(page.getByText("DALAM PROSES")).toBeVisible();
     });
   });
   // test.describe("Bot Testing", () => {
