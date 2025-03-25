@@ -1069,4 +1069,99 @@ test.describe("Bot Testing", () => {
       ).not.toBeVisible();
     });
   });
+
+  test.describe("Daftar Berkas Pengetahuan", () => {
+    test("Tambah Berkas (TC-26)", async ({ page }) => {
+      await page.goto("http://sim.dev.asvri.ai/");
+      await page.locator('input[name="identifier"]').fill("PKLJAGR");
+      await page.getByRole("button", { name: "Sign in" }).click();
+      await page.locator('input[type="password"]').fill("IFcXRPCK");
+      await page.getByRole("button", { name: "Continue" }).click();
+      await expect(
+        page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+      ).toBeVisible();
+      await page.locator(".grid > .bg-white").click();
+      await expect(page).toHaveURL(
+        "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+      );
+      await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+
+      await page
+        .locator("div")
+        .filter({ hasText: /^TestingRAG0 Token dipakai$/ })
+        .first()
+        .click();
+      await page.locator("a").filter({ hasText: "Pengetahuan" }).click();
+      await page.locator("a").filter({ hasText: "Sumber Data" }).click();
+      await page
+        .getByRole("cell", { name: "3 Lihat Berkas" })
+        .locator("u")
+        .click();
+      await page.getByRole("button", { name: "Tambah Berkas" }).click();
+      await page.getByRole("combobox", { name: "Kategori Dokumen *" }).click();
+      await page.getByRole("option", { name: "Situs Web" }).click();
+
+      await page
+        .getByRole("switch", { name: "Private" })
+        .locator("div")
+        .click();
+      await page.getByRole("button", { name: "Unggah File" }).click();
+
+      await page.getByRole("button", { name: "Selanjutnya" }).click();
+      await page
+        .locator("#multifile")
+        .setInputFiles(
+          "D:/File Coding/RPL-SMKN-8-MALANG/PKL_24-25/PlayWright/Testing-Asvri-AI/assets upload/test.docx"
+        );
+      await expect(
+        page.locator(".flex-1>.col-span-12>div>.flex>.text-sm")
+      ).toHaveText("test.docx");
+      await page.getByRole('button', { name: 'Simpan' }).click();
+      await expect(page.getByRole('cell', { name: 'test.docx File Size: 0.36 MB' })).toBeVisible();
+    });
+    
+    test('Filter (TC-27)', async ({ page }) => {
+      await page.goto("http://sim.dev.asvri.ai/");
+      await page.locator('input[name="identifier"]').fill("PKLJAGR");
+      await page.getByRole("button", { name: "Sign in" }).click();
+      await page.locator('input[type="password"]').fill("IFcXRPCK");
+      await page.getByRole("button", { name: "Continue" }).click();
+      await expect(
+        page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+      ).toBeVisible();
+      await page.locator(".grid > .bg-white").click();
+      await expect(page).toHaveURL(
+        "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+      );
+      await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+
+      await page
+        .locator("div")
+        .filter({ hasText: /^TestingRAG0 Token dipakai$/ })
+        .first()
+        .click();
+      await page.locator("a").filter({ hasText: "Pengetahuan" }).click();
+      await page.locator("a").filter({ hasText: "Sumber Data" }).click();
+      await page
+        .getByRole("cell", { name: "4 Lihat Berkas" })
+        .locator("u")
+        .click();
+
+        await page.locator('button:nth-child(2)').click();
+        // tombol reset
+        await page.getByRole('combobox', { name: 'Jenis Dokumen' }).click();
+        await page.getByRole('option', { name: 'Situs Web' }).click();
+        await page.getByRole('spinbutton', { name: 'Minimal Kata' }).fill('34');
+        await page.getByRole('button', { name: 'Reset' }).click();
+        await expect(page.locator('[type="number"]')).not.toHaveValue('34');
+        // tombol reset
+
+        await page.getByRole('combobox', { name: 'Jenis Dokumen' }).click();
+        await page.getByRole('option', { name: 'Situs Web' }).click();
+        await page.getByRole('spinbutton', { name: 'Minimal Kata' }).fill('55');
+        await page.getByRole('button', { name: 'Terapkan' }).click();
+        await expect(page.getByRole('cell', { name: 'pusat.pdf File Size: 0.00 MB' })).toBeVisible()
+    })
+    
+  });
 });
