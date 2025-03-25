@@ -1116,11 +1116,13 @@ test.describe("Bot Testing", () => {
       await expect(
         page.locator(".flex-1>.col-span-12>div>.flex>.text-sm")
       ).toHaveText("test.docx");
-      await page.getByRole('button', { name: 'Simpan' }).click();
-      await expect(page.getByRole('cell', { name: 'test.docx File Size: 0.36 MB' })).toBeVisible();
+      await page.getByRole("button", { name: "Simpan" }).click();
+      await expect(
+        page.getByRole("cell", { name: "test.docx File Size: 0.36 MB" })
+      ).toBeVisible();
     });
-    
-    test('Filter (TC-27)', async ({ page }) => {
+
+    test("Filter (TC-27)", async ({ page }) => {
       await page.goto("http://sim.dev.asvri.ai/");
       await page.locator('input[name="identifier"]').fill("PKLJAGR");
       await page.getByRole("button", { name: "Sign in" }).click();
@@ -1147,21 +1149,221 @@ test.describe("Bot Testing", () => {
         .locator("u")
         .click();
 
-        await page.locator('button:nth-child(2)').click();
-        // tombol reset
-        await page.getByRole('combobox', { name: 'Jenis Dokumen' }).click();
-        await page.getByRole('option', { name: 'Situs Web' }).click();
-        await page.getByRole('spinbutton', { name: 'Minimal Kata' }).fill('34');
-        await page.getByRole('button', { name: 'Reset' }).click();
-        await expect(page.locator('[type="number"]')).not.toHaveValue('34');
-        // tombol reset
+      await page.locator("button:nth-child(2)").click();
+      // tombol reset
+      await page.getByRole("combobox", { name: "Jenis Dokumen" }).click();
+      await page.getByRole("option", { name: "Situs Web" }).click();
+      await page.getByRole("spinbutton", { name: "Minimal Kata" }).fill("34");
+      await page.getByRole("button", { name: "Reset" }).click();
+      await expect(page.locator('[type="number"]')).not.toHaveValue("34");
+      // tombol reset
 
-        await page.getByRole('combobox', { name: 'Jenis Dokumen' }).click();
-        await page.getByRole('option', { name: 'Situs Web' }).click();
-        await page.getByRole('spinbutton', { name: 'Minimal Kata' }).fill('55');
-        await page.getByRole('button', { name: 'Terapkan' }).click();
-        await expect(page.getByRole('cell', { name: 'pusat.pdf File Size: 0.00 MB' })).toBeVisible()
-    })
-    
+      await page.getByRole("combobox", { name: "Jenis Dokumen" }).click();
+      await page.getByRole("option", { name: "Situs Web" }).click();
+      await page.getByRole("spinbutton", { name: "Minimal Kata" }).fill("55");
+      await page.getByRole("button", { name: "Terapkan" }).click();
+      await expect(
+        page.getByRole("cell", { name: "pusat.pdf File Size: 0.00 MB" })
+      ).toBeVisible();
+    });
+
+    test("Cuplikan Kata (TC-28)", async ({ page }) => {
+      await page.goto("http://sim.dev.asvri.ai/");
+      await page.locator('input[name="identifier"]').fill("PKLJAGR");
+      await page.getByRole("button", { name: "Sign in" }).click();
+      await page.locator('input[type="password"]').fill("IFcXRPCK");
+      await page.getByRole("button", { name: "Continue" }).click();
+      await expect(
+        page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+      ).toBeVisible();
+      await page.locator(".grid > .bg-white").click();
+      await expect(page).toHaveURL(
+        "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+      );
+      await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+
+      await page
+        .locator("div")
+        .filter({ hasText: /^TestingRAG0 Token dipakai$/ })
+        .first()
+        .click();
+      await page.locator("a").filter({ hasText: "Pengetahuan" }).click();
+      await page.locator("a").filter({ hasText: "Sumber Data" }).click();
+      await page
+        .getByRole("cell", { name: "4 Lihat Berkas" })
+        .locator("u")
+        .click();
+      await page
+        .getByRole("row", { name: "test.docx File Size: 0.36 MB" })
+        .getByRole("button")
+        .click();
+      await page
+        .getByRole("menuitem", { name: "Cuplikan Kata" })
+        .locator("a")
+        .click();
+      await expect(
+        page.locator("div").filter({ hasText: /^Cuplikan Data$/ })
+      ).toBeVisible();
+    });
+
+    test("Edit (TC-29)", async ({ page }) => {
+      await page.goto("http://sim.dev.asvri.ai/");
+      await page.locator('input[name="identifier"]').fill("PKLJAGR");
+      await page.getByRole("button", { name: "Sign in" }).click();
+      await page.locator('input[type="password"]').fill("IFcXRPCK");
+      await page.getByRole("button", { name: "Continue" }).click();
+      await expect(
+        page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+      ).toBeVisible();
+      await page.locator(".grid > .bg-white").click();
+      await expect(page).toHaveURL(
+        "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+      );
+      await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+
+      await page
+        .locator("div")
+        .filter({ hasText: /^TestingRAG0 Token dipakai$/ })
+        .first()
+        .click();
+      await page.locator("a").filter({ hasText: "Pengetahuan" }).click();
+      await page.locator("a").filter({ hasText: "Sumber Data" }).click();
+      await page
+        .getByRole("cell", { name: "4 Lihat Berkas" })
+        .locator("u")
+        .click();
+      await page
+        .getByRole("row", { name: "test.docx File Size: 0.36 MB" })
+        .getByRole("button")
+        .click();
+      await page.getByRole("menuitem", { name: "Edit" }).locator("a").click();
+      await page
+        .getByRole("switch", { name: "Publik" })
+        .locator("span")
+        .first()
+        .click();
+      await page.getByRole("button", { name: "Simpan" }).click();
+      await expect(page.locator(".inline-flex>.gap-2").first()).toHaveText(
+        "Private"
+      );
+    });
+
+    test("re-Fetch Data (TC-30)", async ({ page }) => {
+      await page.goto("http://sim.dev.asvri.ai/");
+      await page.locator('input[name="identifier"]').fill("PKLJAGR");
+      await page.getByRole("button", { name: "Sign in" }).click();
+      await page.locator('input[type="password"]').fill("IFcXRPCK");
+      await page.getByRole("button", { name: "Continue" }).click();
+      await expect(
+        page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+      ).toBeVisible();
+      await page.locator(".grid > .bg-white").click();
+      await expect(page).toHaveURL(
+        "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+      );
+      await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+
+      await page
+        .locator("div")
+        .filter({ hasText: /^TestingRAG0 Token dipakai$/ })
+        .first()
+        .click();
+      await page.locator("a").filter({ hasText: "Pengetahuan" }).click();
+      await page.locator("a").filter({ hasText: "Sumber Data" }).click();
+      await page
+        .getByRole("cell", { name: "4 Lihat Berkas" })
+        .locator("u")
+        .click();
+      await page
+        .getByRole("row", { name: "test.docx File Size: 0.36 MB" })
+        .getByRole("button")
+        .click();
+      await page
+        .getByRole("menuitem", { name: "re-Fetch Data" })
+        .locator("a")
+        .click();
+      await expect(page.locator('[data-pc-name="toast"]')).toBeVisible();
+    });
+
+    test("Tambah Cuplikan Data (TC-31)", async ({ page }) => {
+      await page.goto("http://sim.dev.asvri.ai/");
+      await page.locator('input[name="identifier"]').fill("PKLJAGR");
+      await page.getByRole("button", { name: "Sign in" }).click();
+      await page.locator('input[type="password"]').fill("IFcXRPCK");
+      await page.getByRole("button", { name: "Continue" }).click();
+      await expect(
+        page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+      ).toBeVisible();
+      await page.locator(".grid > .bg-white").click();
+      await expect(page).toHaveURL(
+        "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+      );
+      await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+
+      await page
+        .locator("div")
+        .filter({ hasText: /^TestingRAG0 Token dipakai$/ })
+        .first()
+        .click();
+      await page.locator("a").filter({ hasText: "Pengetahuan" }).click();
+      await page.locator("a").filter({ hasText: "Sumber Data" }).click();
+      await page
+        .getByRole("cell", { name: "4 Lihat Berkas" })
+        .locator("u")
+        .click();
+      await page
+        .getByRole("row", { name: "test.docx File Size: 0.36 MB" })
+        .getByRole("button")
+        .click();
+      await page
+        .getByRole("menuitem", { name: "Cuplikan Kata" })
+        .locator("a")
+        .click();
+      await expect(
+        page.locator("div").filter({ hasText: /^Cuplikan Data$/ })
+      ).toBeVisible();
+      await page.getByRole("button", { name: "Tambah Cuplikan" }).click();
+      await page
+        .getByRole("textbox", { name: "Konten *" })
+        .fill("test cuplikan data");
+      await page.getByRole("button", { name: "Simpan" }).click();
+    });
+
+    test("Hapus (TC-32)", async ({ page }) => {
+      await page.goto("http://sim.dev.asvri.ai/");
+      await page.locator('input[name="identifier"]').fill("PKLJAGR");
+      await page.getByRole("button", { name: "Sign in" }).click();
+      await page.locator('input[type="password"]').fill("IFcXRPCK");
+      await page.getByRole("button", { name: "Continue" }).click();
+      await expect(
+        page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+      ).toBeVisible();
+      await page.locator(".grid > .bg-white").click();
+      await expect(page).toHaveURL(
+        "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+      );
+      await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+
+      await page
+        .locator("div")
+        .filter({ hasText: /^TestingRAG0 Token dipakai$/ })
+        .first()
+        .click();
+      await page.locator("a").filter({ hasText: "Pengetahuan" }).click();
+      await page.locator("a").filter({ hasText: "Sumber Data" }).click();
+      await page
+        .getByRole("cell", { name: "4 Lihat Berkas" })
+        .locator("u")
+        .click();
+      await page
+        .getByRole("row", { name: "test.docx File Size: 0.36 MB" })
+        .getByRole("button")
+        .click();
+      await page.getByRole("menuitem", { name: "Hapus" }).locator("a").click();
+      await page.getByRole("button", { name: "Hapus" }).click();
+      await expect(
+        page.getByRole("cell", { name: "test.docx File Size: 0.36 MB" })
+      ).not.toBeVisible();
+    });
   });
 });
