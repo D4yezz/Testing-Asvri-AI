@@ -1367,3 +1367,161 @@ test.describe("Bot Testing", () => {
     });
   });
 });
+
+test.describe("Bot test saja", () => {
+  test.describe("Konfigurasi Bot (Pengaturan)", () => {
+    test("Form Konfigurasi (TC-33)", async ({ page }) => {
+      await page.goto("http://sim.dev.asvri.ai/");
+      await page.locator('input[name="identifier"]').fill("PKLJAGR");
+      await page.getByRole("button", { name: "Sign in" }).click();
+      await page.locator('input[type="password"]').fill("IFcXRPCK");
+      await page.getByRole("button", { name: "Continue" }).click();
+      await expect(
+        page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+      ).toBeVisible();
+      await page.locator(".grid > .bg-white").click();
+      await expect(page).toHaveURL(
+        "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+      );
+      await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+      await page
+        .locator("div")
+        .filter({ hasText: /^test saja diubahMs GraphRAG0 Token dipakai$/ })
+        .first()
+        .click();
+      await page.locator("a").filter({ hasText: "Pengaturan" }).click();
+      await page.locator("a").filter({ hasText: "Konfigurasi Bot" }).click();
+      await page.getByRole("textbox", { name: "Nama Bot" }).click();
+      await page
+        .getByRole("textbox", { name: "Nama Bot" })
+        .fill("test saja diubah");
+      await page.getByRole("combobox", { name: "SQL Agent Jenis Bot" }).click();
+      await page.getByRole("option", { name: "Ms GraphRAG" }).click();
+      await page
+        .getByRole("combobox", { name: "deepseek-r1:free (Deepseek)" })
+        .click();
+      await page.getByRole("option", { name: "qwen-2.5-32b (Groq)" }).click();
+      await page
+        .getByRole("slider", { name: "Temperatur Model" })
+        .locator("div")
+        .click();
+      await page
+        .locator("#val_temp > .form-shadow-input > div")
+        .first()
+        .click();
+      await page
+        .getByRole("combobox", { name: "Ollama Embeddings Embedding" })
+        .click();
+      await page.getByRole("option", { name: "text-embedding-ada-" }).click();
+      await page
+        .getByRole("switch", { name: "Streaming Percakapan" })
+        .locator("span")
+        .first()
+        .click();
+      await page
+        .getByRole("switch", { name: "Streaming Percakapan" })
+        .locator("span")
+        .first()
+        .click();
+      await page
+        .getByRole("switch", { name: "Kutip sumber dalam Percakapan" })
+        .locator("span")
+        .first()
+        .click();
+      await page
+        .getByRole("switch", { name: "Menggunakan Pencarian dari" })
+        .locator("span")
+        .nth(1)
+        .click();
+      await page
+        .getByRole("switch", { name: "Gunakan Pengambilan Pencarian" })
+        .locator("span")
+        .first()
+        .click();
+      await page
+        .getByRole("spinbutton", { name: "Jumlah dokumen yang akan" })
+        .click();
+      await page
+        .getByRole("spinbutton", { name: "Jumlah dokumen yang akan" })
+        .fill("12");
+      await page.getByLabel("Semantic Search Similarity").selectOption("0.5");
+      await page.getByRole("spinbutton", { name: "Kontekstual Bot" }).click();
+      await page
+        .getByRole("spinbutton", { name: "Kontekstual Bot" })
+        .fill("07");
+      await page
+        .getByRole("textbox", { name: "Pengaturan Prompt : Menjawab" })
+        .click();
+      await page
+        .getByRole("textbox", { name: "Pengaturan Prompt : Menjawab" })
+        .fill(
+          "Anda adalah asisten AI yang sangat membantu dan pintar. Pertanyaan: {question} Jawaban yang membantu dalam format markdown text:"
+        );
+      await page
+        .getByRole("switch", { name: "Aktifkan Perlindungan Bot" })
+        .locator("div")
+        .click();
+      await page
+        .getByRole("switch", { name: "Sinkronisasi Otomatis Sumber" })
+        .locator("span")
+        .nth(1)
+        .click();
+      await page
+        .getByRole("switch", { name: "Atur Ulang Sesi Obrolan" })
+        .locator("div")
+        .click();
+      await page
+        .getByRole("spinbutton", { name: "Batas Waktu Tidak Aktif" })
+        .click();
+      await page
+        .getByRole("spinbutton", { name: "Batas Waktu Tidak Aktif" })
+        .fill("4000");
+      await page.getByRole("button", { name: "Simpan" }).first().click();
+      await page
+        .locator("div")
+        .filter({ hasText: /^BOT ASVRI$/ })
+        .first()
+        .click();
+      await expect(
+        page
+          .locator("div")
+          .filter({ hasText: /^test saja diubahMs GraphRAG0 Token dipakai$/ })
+          .first()
+      ).toBeVisible();
+    });
+
+    test(" Form Perlindungan Sandi (TC-34)", async ({ page }) => {
+      await page.goto("http://sim.dev.asvri.ai/");
+      await page.locator('input[name="identifier"]').fill("PKLJAGR");
+      await page.getByRole("button", { name: "Sign in" }).click();
+      await page.locator('input[type="password"]').fill("IFcXRPCK");
+      await page.getByRole("button", { name: "Continue" }).click();
+      await expect(
+        page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+      ).toBeVisible();
+      await page.locator(".grid > .bg-white").click();
+      await expect(page).toHaveURL(
+        "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+      );
+      await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+      await page
+        .locator("div")
+        .filter({ hasText: /^test saja diubahMs GraphRAG0 Token dipakai$/ })
+        .first()
+        .click();
+      await page.waitForLoadState("load");
+      await page.locator("a").filter({ hasText: "Pengaturan" }).click();
+      await page.locator("a").filter({ hasText: "Konfigurasi Bot" }).click();
+      await page
+        .getByRole("switch", { name: "Aktifkan Perlindungan Kata" })
+        .locator("span")
+        .first()
+        .click();
+      await page
+        .getByRole("textbox", { name: "Kata Sandi" })
+        .fill("testkatasandi");
+      await page.getByRole("button", { name: "Simpan" }).nth(1).click();
+      // Error
+    });
+  });
+});
