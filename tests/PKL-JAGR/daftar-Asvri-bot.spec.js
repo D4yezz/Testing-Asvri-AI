@@ -1509,6 +1509,9 @@ test.describe("Bot test saja", () => {
         .filter({ hasText: /^test saja diubahMs GraphRAG0 Token dipakai$/ })
         .first()
         .click();
+      await expect(
+        page.getByRole("heading", { name: "Ringkasan Data statistik" })
+      ).toBeVisible();
       await page.waitForLoadState("load");
       await page.locator("a").filter({ hasText: "Pengaturan" }).click();
       await page.locator("a").filter({ hasText: "Konfigurasi Bot" }).click();
@@ -1521,7 +1524,6 @@ test.describe("Bot test saja", () => {
         .getByRole("textbox", { name: "Kata Sandi" })
         .fill("testkatasandi");
       await page.getByRole("button", { name: "Simpan" }).nth(1).click();
-      // Error
     });
   });
 });
