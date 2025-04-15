@@ -42,7 +42,7 @@ await page.getByRole('textbox').click();
 await page.getByRole('textbox').fill('IFcXRPCK');
 await page.getByRole('button', { name: 'Continue' }).click()
 await expect(page).toHaveURL('https://sim.dev.asvri.ai/');
-
+await page.getByRole('dialog').getByText('PKL JAGR').click();
 await page.getByRole('toolbar').getByText('PKL JAGR').click();
 await page.getByRole('menuitem', { name: 'Pengaturan Akun' }).click();
 await page.getByText('Ubah Password').click();
@@ -60,7 +60,7 @@ await page.getByRole('button', { name: 'Simpan' }).click();
 })
 
 test.describe('Pindah Organisasi', () => {
-  test("Ubah Password (TC-01)", async ({ page }) => {
+  test("cari (TC-01)", async ({ page }) => {
     await page.goto('http://sim.dev.asvri.ai/');
     // await expect(page).toHaveURL('https://auth.dev.siap.id/sign-in');
     await page.getByRole('textbox').click();
