@@ -40,6 +40,7 @@ test.describe("Pengaturan akun", () => {
     await page.getByRole("button", { name: "Sign in" }).click();
     await page.locator('input[type="password"]').fill("YRdZIrsq");
     await page.getByRole("button", { name: "Continue" }).click();
+    await page.waitForLoadState('load');
     await expect(
       page.getByRole("heading", { name: "Daftar Organisasi Anda" })
     ).toBeVisible();
@@ -83,6 +84,7 @@ test.describe("Pindah Organisasi", () => {
     await page.getByRole("button", { name: "Sign in" }).click();
     await page.locator('input[type="password"]').fill("YRdZIrsq");
     await page.getByRole("button", { name: "Continue" }).click();
+    await page.waitForLoadState('load');
     await expect(
       page.getByRole("heading", { name: "Daftar Organisasi Anda" })
     ).toBeVisible();
@@ -130,6 +132,7 @@ test("Keluar (TC-05)", async ({ page }) => {
   await page.getByRole("button", { name: "Sign in" }).click();
   await page.locator('input[type="password"]').fill("YRdZIrsq");
   await page.getByRole("button", { name: "Continue" }).click();
+  await page.waitForLoadState('load')
   await expect(
     page.getByRole("heading", { name: "Daftar Organisasi Anda" })
   ).toBeVisible();
