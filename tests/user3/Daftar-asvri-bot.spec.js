@@ -366,3 +366,17 @@ test.describe("Bot Umum PKL JAGR", () => {
       });
     });
   });
+
+  test.describe('Test Fitur Peran Bot', () => {
+    test('Pengguna', async ({ page }) => {
+      
+    })
+    test('Admin', async ({ page }) => {
+      
+    })
+    test('Pengelola Data', async ({ page }) => {
+      
+    })
+    
+  })
+  
