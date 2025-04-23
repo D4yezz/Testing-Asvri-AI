@@ -141,8 +141,3 @@ test("Keluar (TC-05)", async ({ page }) => {
   await page.getByRole("menuitem", { name: "Keluar" }).click();
   await expect(page).toHaveURL("https://auth.dev.siap.id/sign-in");
 });
-// asdbuiaebfhbakb fkabfsdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-// vaaaaaaaaaaaaaaa
-// aaaaaaaaaaaaaaaaaaaaaaaa
-// aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaav
-// aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaddddddddddddddddddddddddddddddddddddd
