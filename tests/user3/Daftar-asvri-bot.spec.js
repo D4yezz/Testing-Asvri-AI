@@ -302,130 +302,240 @@ test.describe("Bot Umum PKL JAGR", () => {
       await expect(page.locator(".overflow-y-auto>.space-y-2")).not.toBeEmpty();
     });
   });
+});
 
-  test.describe('Test Fitur Peran Bot', () => {
-    test('Pengguna', async ({ page }) => {
-      test.setTimeout(120000)
-        await page.goto('http://sim.dev.asvri.ai/');
-        
-        await page.getByRole('textbox').click();
-        await page.getByRole('textbox').fill('PKLJAGR');
-        await page.getByRole('button', { name: 'Sign in' }).click();
-        await expect(page).toHaveURL('https://auth.dev.siap.id/sign-in/password');
-    
-        await page.getByRole('textbox').click();
-        await page.getByRole('textbox').fill('IFcXRPCK');
-        await page.getByRole('button', { name: 'Continue' }).click();
-        await expect(page).toHaveURL('https://sim.dev.asvri.ai/');
-    
-        await page.getByRole('dialog').getByText('PKL JAGR').click();
-    
-        await page.locator('a').filter({ hasText: 'Pengaturan' }).click(); 
-        await page.locator('a').filter({ hasText: 'Pengguna' }).dblclick();
-        // await page.getByRole('row', { name: 'Rahmad Fatih user3 userpkl3@asvri.ai' }).getByRole('button').click();
-        // await page.getByRole('menuitem', { name: 'Plotting Bot' }).locator('a').click();
-       
-        await page.getByRole('row', { name: 'Rahmad Fatih user3 userpkl3@asvri.ai' }).getByRole('button').click();
-        await page.getByRole('menuitem', { name: 'Plotting Bot' }).locator('a').click();
-        await page.getByRole('row', { name: 'test saja SQL Agent Pengguna' }).getByRole('radio').first().check();
-        await page.getByRole('row', { name: 'test saja SQL Agent Pengguna' }).getByRole('checkbox').uncheck();
-        await page.getByRole('row', { name: 'test saja SQL Agent Pengguna' }).getByRole('checkbox').check();
-        await page.getByRole('button', { name: 'Simpan' }).click();
-        // login ke fatih cek fitur
+test.describe("Fitur Peran Bot (Bot test saja)", () => {
+  test("Pengguna (TC-09)", async ({ page }) => {
+    test.setTimeout(120000);
+    await page.goto("http://sim.dev.asvri.ai/");
 
-         
-        await page.getByRole('toolbar').getByText('PKL JAGR').click();
-        await page.getByRole('menuitem', { name: 'Keluar' }).dblclick();
-        await page.getByRole('textbox').click();
-        await page.getByRole('textbox').fill('user3');
-        await page.getByRole('button', { name: 'Sign in' }).click();
-        await page.getByRole('textbox').fill('AWkBAQtX');
-        await page.getByRole('textbox').click({
-          modifiers: ['ControlOrMeta']
-        });
-        await page.getByRole('button', { name: 'Continue' }).click();
-        await page.getByText('PKL JAGR').click();
-        await page.locator('a').filter({ hasText: 'Daftar ASVRI Bot' }).click();
-        await page.locator('div').filter({ hasText: /^test sajaSQL Agent0 Token dipakai$/ }).first().click();
-        await page.locator('a').filter({ hasText: 'Percakapan' }).click();
-        await page.locator('a').filter({ hasText: 'Obrolan' }).click();
-        await page.locator('a').filter({ hasText: 'Riwayat' }).click();
-        await page.locator('a').filter({ hasText: 'Percakapan' }).click();
-        
-    })
-    test('Admin', async ({ page }) => {
-      test.setTimeout(120000)
-          await page.goto('http://sim.dev.asvri.ai/');
-          
-          await page.getByRole('textbox').click();
-          await page.getByRole('textbox').fill('PKLJAGR');
-          await page.getByRole('button', { name: 'Sign in' }).click();
-          await expect(page).toHaveURL('https://auth.dev.siap.id/sign-in/password');
-      
-          await page.getByRole('textbox').click();
-          await page.getByRole('textbox').fill('IFcXRPCK');
-          await page.getByRole('button', { name: 'Continue' }).click();
-          await expect(page).toHaveURL('https://sim.dev.asvri.ai/');
-      
-          await page.getByRole('dialog').getByText('PKL JAGR').click();
-      
-          await page.locator('a').filter({ hasText: 'Pengaturan' }).click(); 
-          await page.locator('a').filter({ hasText: 'Pengguna' }).dblclick();
-          // await page.getByRole('row', { name: 'Rahmad Fatih user3 userpkl3@asvri.ai' }).getByRole('button').click();
-          // await page.getByRole('menuitem', { name: 'Plotting Bot' }).locator('a').click();
-         await page.getByRole('row', { name: 'Rahmad Fatih user3 userpkl3@asvri.ai' }).getByRole('button').click();
-         await page.getByRole('menuitem', { name: 'Plotting Bot' }).locator('a').click();
-         await page.getByRole('row', { name: 'test saja SQL Agent Pengguna' }).getByRole('radio').nth(1).check();
-         await page.getByRole('button', { name: 'Simpan' }).click();
-         await page.getByRole('toolbar').getByText('PKL JAGR').click();
-         await page.getByRole('menuitem', { name: 'Keluar' }).click();
+    await page.getByRole("textbox").click();
+    await page.getByRole("textbox").fill("PKLJAGR");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await expect(page).toHaveURL("https://auth.dev.siap.id/sign-in/password");
 
-         await expect(page).toHaveURL('https://auth.dev.siap.id/sign-in');
-         await page.getByRole('textbox').click();
-        await page.getByRole('textbox').fill('user3');
-        await page.getByRole('button', { name: 'Sign in' }).click();
-        await page.getByRole('textbox').fill('AWkBAQtX');
-       await page.getByRole('button', { name: 'Continue' }).click();
-        await page.getByRole('textbox').click({
-          modifiers: ['ControlOrMeta']
-        });
-        await page.getByRole('button', { name: 'Continue' }).click();
-        await page.getByText('PKL JAGR').click();
-        await page.locator('a').filter({ hasText: 'Daftar ASVRI Bot' }).click();
-        await page.locator('div').filter({ hasText: /^test sajaSQL Agent0 Token dipakai$/ }).first().click();
-        
-    })
-    test('Pengelola Data', async ({ page }) => {
-      test.setTimeout(120000)
-          await page.goto('http://sim.dev.asvri.ai/');
-          
-          await page.getByRole('textbox').click();
-          await page.getByRole('textbox').fill('PKLJAGR');
-          await page.getByRole('button', { name: 'Sign in' }).click();
-          await expect(page).toHaveURL('https://auth.dev.siap.id/sign-in/password');
-      
-          await page.getByRole('textbox').click();
-          await page.getByRole('textbox').fill('IFcXRPCK');
-          await page.getByRole('button', { name: 'Continue' }).click();
-          await expect(page).toHaveURL('https://sim.dev.asvri.ai/');
-      
-          await page.getByRole('dialog').getByText('PKL JAGR').click();
-      
-          await page.locator('a').filter({ hasText: 'Pengaturan' }).click(); 
-          await page.locator('a').filter({ hasText: 'Pengguna' }).dblclick();
-          // await page.getByRole('row', { name: 'Rahmad Fatih user3 userpkl3@asvri.ai' }).getByRole('button').click();
-          // await page.getByRole('menuitem', { name: 'Plotting Bot' }).locator('a').click();
-         await page.getByRole('row', { name: 'Rahmad Fatih user3 userpkl3@asvri.ai' }).getByRole('button').click();
-         await page.getByRole('menuitem', { name: 'Plotting Bot' }).locator('a').click();
-         await page.getByRole('row', { name: 'test saja SQL Agent Pengguna' }).getByRole('radio').nth(2).check();
-         await page.getByRole('button', { name: 'Simpan' }).click();
-         await page.getByRole('toolbar').getByText('PKL JAGR').click();
-         await page.getByRole('menuitem', { name: 'Keluar' }).click();
+    await page.getByRole("textbox").click();
+    await page.getByRole("textbox").fill("IFcXRPCK");
+    await page.getByRole("button", { name: "Continue" }).click();
+    await expect(page).toHaveURL("https://sim.dev.asvri.ai/");
 
-         await page.getByRole('textbox').click();
-         await page.getByRole('textbox').fill('user3');
-         await page.getByRole('button', { name: 'Sign in' }).dblclick();
-    })
-    
-  })
-})
+    await page.getByRole("dialog").getByText("PKL JAGR").click();
+
+    await page.locator("a").filter({ hasText: "Pengaturan" }).click();
+    await page.locator("a").filter({ hasText: "Pengguna" }).dblclick();
+    // await page.getByRole('row', { name: 'Rahmad Fatih user3 userpkl3@asvri.ai' }).getByRole('button').click();
+    // await page.getByRole('menuitem', { name: 'Plotting Bot' }).locator('a').click();
+
+    await page
+      .getByRole("row", { name: "Rahmad Fatih user3 userpkl3@asvri.ai" })
+      .getByRole("button")
+      .click();
+    await page
+      .getByRole("menuitem", { name: "Plotting Bot" })
+      .locator("a")
+      .click();
+    await page
+      .getByRole("row", { name: "test saja SQL Agent Pengguna" })
+      .getByRole("radio")
+      .first()
+      .check();
+    await page
+      .getByRole("row", { name: "test saja SQL Agent Pengguna" })
+      .getByRole("checkbox")
+      .uncheck();
+    await page
+      .getByRole("row", { name: "test saja SQL Agent Pengguna" })
+      .getByRole("checkbox")
+      .check();
+    await page.getByRole("button", { name: "Simpan" }).click();
+    // login ke fatih cek fitur
+
+    await page.getByRole("toolbar").getByText("PKL JAGR").click();
+    await page.getByRole("menuitem", { name: "Keluar" }).dblclick();
+    await page.getByRole("textbox").click();
+    await page.getByRole("textbox").fill("user3");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.getByRole("textbox").fill("AWkBAQtX");
+    await page.getByRole("textbox").click({
+      modifiers: ["ControlOrMeta"],
+    });
+    await page.getByRole("button", { name: "Continue" }).click();
+    await page.getByText("PKL JAGR").click();
+    await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+    await page
+      .locator("div")
+      .filter({ hasText: /^test sajaSQL Agent0 Token dipakai$/ })
+      .first()
+      .click();
+    await page.locator("a").filter({ hasText: "Percakapan" }).click();
+    await page.locator("a").filter({ hasText: "Obrolan" }).click();
+    await page.locator("a").filter({ hasText: "Riwayat" }).click();
+    await page.locator("a").filter({ hasText: "Percakapan" }).click();
+  });
+  test("Admin (TC-10)", async ({ page }) => {
+    test.setTimeout(120000);
+    await page.goto("http://sim.dev.asvri.ai/");
+
+    await page.getByRole("textbox").click();
+    await page.getByRole("textbox").fill("PKLJAGR");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await expect(page).toHaveURL("https://auth.dev.siap.id/sign-in/password");
+
+    await page.getByRole("textbox").click();
+    await page.getByRole("textbox").fill("IFcXRPCK");
+    await page.getByRole("button", { name: "Continue" }).click();
+    await expect(page).toHaveURL("https://sim.dev.asvri.ai/");
+
+    await page.getByRole("dialog").getByText("PKL JAGR").click();
+
+    await page.locator("a").filter({ hasText: "Pengaturan" }).click();
+    await page.locator("a").filter({ hasText: "Pengguna" }).dblclick();
+    // await page.getByRole('row', { name: 'Rahmad Fatih user3 userpkl3@asvri.ai' }).getByRole('button').click();
+    // await page.getByRole('menuitem', { name: 'Plotting Bot' }).locator('a').click();
+    await page
+      .getByRole("row", { name: "Rahmad Fatih user3 userpkl3@asvri.ai" })
+      .getByRole("button")
+      .click();
+    await page
+      .getByRole("menuitem", { name: "Plotting Bot" })
+      .locator("a")
+      .click();
+    await page
+      .getByRole("row", { name: "test saja SQL Agent Pengguna" })
+      .getByRole("radio")
+      .nth(1)
+      .check();
+    await page.getByRole("button", { name: "Simpan" }).click();
+    await page.getByRole("toolbar").getByText("PKL JAGR").click();
+    await page.getByRole("menuitem", { name: "Keluar" }).click();
+
+    await expect(page).toHaveURL("https://auth.dev.siap.id/sign-in");
+    await page.getByRole("textbox").click();
+    await page.getByRole("textbox").fill("user3");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.getByRole("textbox").fill("AWkBAQtX");
+    await page.getByRole("button", { name: "Continue" }).click();
+    await page.getByRole("textbox").click({
+      modifiers: ["ControlOrMeta"],
+    });
+    await page.getByRole("button", { name: "Continue" }).click();
+    await page.getByText("PKL JAGR").click();
+    await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+    await page
+      .locator("div")
+      .filter({ hasText: /^test sajaSQL Agent0 Token dipakai$/ })
+      .first()
+      .click();
+  });
+  test("Pengelola Data (TC-11)", async ({ page }) => {
+    test.setTimeout(120000);
+    await page.goto("http://sim.dev.asvri.ai/");
+
+    await page.getByRole("textbox").click();
+    await page.getByRole("textbox").fill("PKLJAGR");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await expect(page).toHaveURL("https://auth.dev.siap.id/sign-in/password");
+
+    await page.getByRole("textbox").click();
+    await page.getByRole("textbox").fill("IFcXRPCK");
+    await page.getByRole("button", { name: "Continue" }).click();
+    await expect(page).toHaveURL("https://sim.dev.asvri.ai/");
+
+    await page.getByRole("dialog").getByText("PKL JAGR").click();
+
+    await page.locator("a").filter({ hasText: "Pengaturan" }).click();
+    await page.locator("a").filter({ hasText: "Pengguna" }).dblclick();
+    // await page.getByRole('row', { name: 'Rahmad Fatih user3 userpkl3@asvri.ai' }).getByRole('button').click();
+    // await page.getByRole('menuitem', { name: 'Plotting Bot' }).locator('a').click();
+    await page
+      .getByRole("row", { name: "Rahmad Fatih user3 userpkl3@asvri.ai" })
+      .getByRole("button")
+      .click();
+    await page
+      .getByRole("menuitem", { name: "Plotting Bot" })
+      .locator("a")
+      .click();
+    await page
+      .getByRole("row", { name: "test saja SQL Agent Pengguna" })
+      .getByRole("radio")
+      .nth(2)
+      .check();
+    await page.getByRole("button", { name: "Simpan" }).click();
+    await page.getByRole("toolbar").getByText("PKL JAGR").click();
+    await page.getByRole("menuitem", { name: "Keluar" }).click();
+
+    await page.getByRole("textbox").click();
+    await page.getByRole("textbox").fill("user3");
+    await page.getByRole("button", { name: "Sign in" }).dblclick();
+  });
+});
+
+test.describe("Fitur Peran Bot (Bot Testing)", () => {
+  test("Pengguna (TC-12)", async ({ page }) => {});
+
+  test("Admin (TC-13)", async ({ page }) => {});
+
+  test("Pengelola Data (TC-14) (Bot Testing)", async ({ page }) => {
+    await page.goto("http://sim.dev.asvri.ai/");
+    await page.locator('input[name="identifier"]').fill("PKLJAGR");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.locator('input[type="password"]').fill("IFcXRPCK");
+    await page.getByRole("button", { name: "Continue" }).click();
+    await expect(
+      page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+    ).toBeVisible();
+    await page.locator(".grid > .bg-white").click();
+    await expect(page).toHaveURL(
+      "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+    );
+    await page.locator("a").filter({ hasText: "Pengaturan" }).click();
+    await page.locator("a").filter({ hasText: "Pengguna" }).click();
+    await page
+      .getByRole("row", { name: "Rahmad Fatih user3 userpkl3@asvri.ai" })
+      .getByRole("button")
+      .click();
+    await page
+      .getByRole("menuitem", { name: "Plotting Bot" })
+      .locator("a")
+      .click();
+    await page
+      .getByRole("row", { name: "Testing RAG Pengguna Admin" })
+      .getByRole("checkbox")
+      .check();
+    await page
+      .getByRole("row", { name: "Testing RAG Pengguna Admin" })
+      .getByRole("radio")
+      .nth(2)
+      .check();
+    await page.getByRole("button", { name: "Simpan" }).click();
+
+    await page.getByRole("toolbar").getByRole("img").nth(1).click();
+    await page.getByRole("menuitem", { name: "Keluar" }).click();
+    await page.locator('input[name="identifier"]').fill("user3");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.locator('input[type="password"]').fill("AWkBAQtX");
+    await page.getByRole("button", { name: "Continue" }).click();
+    await page.waitForLoadState("load");
+    await expect(
+      page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+    ).toBeVisible();
+    await page.locator(".grid > .bg-white").click();
+    await expect(page).toHaveURL(
+      "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+    );
+    await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+    await page
+      .locator("div")
+      .filter({ hasText: /^TestingRAG0 Token dipakai$/ })
+      .first()
+      .click();
+    await page.locator("a").filter({ hasText: "Pengetahuan" }).click();
+    await expect(
+      page.locator("a").filter({ hasText: "Pengetahuan" })
+    ).toBeVisible();
+    await expect(
+      page.locator("a").filter({ hasText: "Sumber Data" })
+    ).toBeVisible();
+    await expect(page.locator("div>.space-y-1")).toHaveCount(2);
+  });
+});
