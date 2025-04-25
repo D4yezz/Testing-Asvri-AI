@@ -471,9 +471,151 @@ test.describe("Fitur Peran Bot (Bot test saja)", () => {
 });
 
 test.describe("Fitur Peran Bot (Bot Testing)", () => {
-  test("Pengguna (TC-12)", async ({ page }) => {});
+  test("Pengguna (TC-12)", async ({ page }) => {
+    await page.goto("http://sim.dev.asvri.ai/");
+    await page.locator('input[name="identifier"]').fill("PKLJAGR");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.locator('input[type="password"]').fill("IFcXRPCK");
+    await page.getByRole("button", { name: "Continue" }).click();
+    await expect(
+      page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+    ).toBeVisible();
+    await page.locator(".grid > .bg-white").click();
+    await expect(page).toHaveURL(
+      "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+    );
+    await page.locator("a").filter({ hasText: "Pengaturan" }).click();
+    await page.locator("a").filter({ hasText: "Pengguna" }).click();
+    await page
+      .getByRole("row", { name: "Rahmad Fatih user3 userpkl3@asvri.ai" })
+      .getByRole("button")
+      .click();
+    await page
+      .getByRole("menuitem", { name: "Plotting Bot" })
+      .locator("a")
+      .click();
+    await page
+      .getByRole("row", { name: "Testing RAG Pengguna Admin" })
+      .getByRole("checkbox")
+      .check();
+    await page
+      .getByRole("row", { name: "Testing RAG Pengguna Admin" })
+      .getByRole("radio")
+      .first()
+      .check();
+    await page.getByRole("button", { name: "Simpan" }).click();
 
-  test("Admin (TC-13)", async ({ page }) => {});
+    await page.getByRole("toolbar").getByRole("img").nth(1).click();
+    await page.getByRole("menuitem", { name: "Keluar" }).click();
+    await page.locator('input[name="identifier"]').fill("user3");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.locator('input[type="password"]').fill("AWkBAQtX");
+    await page.getByRole("button", { name: "Continue" }).click();
+    await page.waitForTimeout(1000);
+    await expect(
+      page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+    ).toBeVisible();
+    await page.locator(".grid > .bg-white").click();
+    await expect(page).toHaveURL(
+      "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+    );
+    await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+    await page
+      .locator("div")
+      .filter({ hasText: /^TestingRAG0 Token dipakai$/ })
+      .first()
+      .click();
+    await page.locator("a").filter({ hasText: "Percakapan" }).click();
+    await expect(
+      page.locator("a").filter({ hasText: "Percakapan" })
+    ).toBeVisible();
+    await expect(
+      page.locator("a").filter({ hasText: "Obrolan" })
+    ).toBeVisible();
+    await expect(
+      page.locator("a").filter({ hasText: "Riwayat" })
+    ).toBeVisible();
+    await expect(page.locator("div>.space-y-1")).toHaveCount(2);
+  });
+
+  test("Admin (TC-13)", async ({ page }) => {
+    await page.goto("http://sim.dev.asvri.ai/");
+    await page.locator('input[name="identifier"]').fill("PKLJAGR");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.locator('input[type="password"]').fill("IFcXRPCK");
+    await page.getByRole("button", { name: "Continue" }).click();
+    await expect(
+      page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+    ).toBeVisible();
+    await page.locator(".grid > .bg-white").click();
+    await expect(page).toHaveURL(
+      "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+    );
+    await page.locator("a").filter({ hasText: "Pengaturan" }).click();
+    await page.locator("a").filter({ hasText: "Pengguna" }).click();
+    await page
+      .getByRole("row", { name: "Rahmad Fatih user3 userpkl3@asvri.ai" })
+      .getByRole("button")
+      .click();
+    await page
+      .getByRole("menuitem", { name: "Plotting Bot" })
+      .locator("a")
+      .click();
+    await page
+      .getByRole("row", { name: "Testing RAG Pengguna Admin" })
+      .getByRole("checkbox")
+      .check();
+    await page
+      .getByRole("row", { name: "Testing RAG Pengguna Admin" })
+      .getByRole("radio")
+      .nth(1)
+      .check();
+    await page.getByRole("button", { name: "Simpan" }).click();
+
+    await page.getByRole("toolbar").getByRole("img").nth(1).click();
+    await page.getByRole("menuitem", { name: "Keluar" }).click();
+    await page.locator('input[name="identifier"]').fill("user3");
+    await page.getByRole("button", { name: "Sign in" }).click();
+    await page.locator('input[type="password"]').fill("AWkBAQtX");
+    await page.getByRole("button", { name: "Continue" }).click();
+    await page.waitForTimeout(1000);
+    await expect(
+      page.getByRole("heading", { name: "Daftar Organisasi Anda" })
+    ).toBeVisible();
+    await page.locator(".grid > .bg-white").click();
+    await expect(page).toHaveURL(
+      "https://sim.dev.asvri.ai/orgs/c2117f0f11f4a6aed00c4705f"
+    );
+    await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
+    await page
+      .locator("div")
+      .filter({ hasText: /^TestingRAG0 Token dipakai$/ })
+      .first()
+      .click();
+    await page.locator("a").filter({ hasText: "Percakapan" }).click();
+    await expect(
+      page.locator("a").filter({ hasText: "Obrolan" })
+    ).toBeVisible();
+    await expect(
+      page.locator("a").filter({ hasText: "Riwayat" })
+    ).toBeVisible();
+    await expect(
+      page.locator("a").filter({ hasText: "Analitik" })
+    ).toBeVisible();
+    // await expect(page.locator("div>.ml-8>.ml-4").first())).toHaveCount(3);
+    await page.locator("a").filter({ hasText: "Pengetahuan" }).click();
+    await expect(
+      page.locator("a").filter({ hasText: "Sumber Data" })
+    ).toBeVisible();
+    await page.locator("a").filter({ hasText: "Pengaturan" }).click();
+    // await expect(page.locator("div>.ml-8>.space-y-1").nth(2)).toHaveCount(2);
+    await expect(
+      page.locator("a").filter({ hasText: "Konfigurasi Bot" })
+    ).toBeVisible();
+    await expect(
+      page.locator("a").filter({ hasText: "Integrasi layanan" })
+    ).toBeVisible();
+  });
 
   test("Pengelola Data (TC-14) (Bot Testing)", async ({ page }) => {
     await page.goto("http://sim.dev.asvri.ai/");
