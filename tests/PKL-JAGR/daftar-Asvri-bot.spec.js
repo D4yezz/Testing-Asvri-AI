@@ -17,7 +17,7 @@ test.describe("Toggle", () => {
     );
     await page.locator("a").filter({ hasText: "Daftar ASVRI Bot" }).click();
     await page.getByRole("combobox", { name: "Kategori ASVRI BOT" }).click();
-    await page.getByRole("option", { name: "Table RAG" }).click();
+    await page.getByRole("option", { name: "SQL Agent" }).click();
     await expect(
       page.getByText("Belum ada daftar bot ditemukan")
     ).toBeVisible();
